@@ -4,7 +4,6 @@
     "es2021": true
   },
   "extends": [
-    "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier"
@@ -17,8 +16,7 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/consistent-type-definitions": "error",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error"
-  }
+    "@typescript-eslint/consistent-type-definitions": "error"
+  },
+  "ignorePatterns": ["node_modules/", "dist/"]
 }

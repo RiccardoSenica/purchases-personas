@@ -4,7 +4,7 @@
     "start": "prisma generate && node dist/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "lint": "next lint",
+    "lint": "eslint . --fix",
     "format": "prettier --config .prettierrc '**/*.{ts,json,md}' --write",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install",

@@ -1,17 +1,15 @@
-import { makeRequest } from './utils/anthropicClient';
-import { savePersonaJson } from './utils/savePersonaJson';
-import { savePersonaDb } from './utils/savePersonaDb';
-import { generatePromptWithMBTI } from './utils/personalityTrait';
+import { generate as generatePersona } from './persona/store';
 
-const prompt =
-  'Generate a detailed, realistic persona with specific real-world values including store names, brands and locations. Use frequencies per week, ISO timestamps relative to the current week. Personality trait: <MBTI_AND_TRAITS_HERE>';
+import { generate as generatePurchases } from './purchase/store';
 
-const fullPrompt = generatePromptWithMBTI(prompt);
+const personaPromise = generatePersona();
 
-const personaPromise = makeRequest(fullPrompt);
+personaPromise.then(id => {
+  console.log(`Persona generated! Now generating purchases for id ${id}`);
 
-personaPromise.then(persona => {
-  savePersonaDb(persona).then(id => savePersonaJson(persona, id));
+  const purchasesPromise = generatePurchases(id);
 
-  console.log('New persona:', persona);
+  purchasesPromise.then(() => {
+    console.log('Purchases generated!');
+  });
 });

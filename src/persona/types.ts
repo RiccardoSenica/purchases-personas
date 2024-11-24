@@ -1,55 +1,55 @@
-type Pet = {
+interface Pet {
   [key: string]: any;
-};
+}
 
-type FrequencyObject = {
+interface FrequencyObject {
   name: string;
   frequency: number;
-};
+}
 
-type SubscriptionBill = {
+interface SubscriptionBill {
   name: string;
   amount: number;
   date: string | Date;
-};
+}
 
-type ActivityObject = {
+interface ActivityObject {
   name: string;
   frequency: number;
   schedule?: string[];
-};
+}
 
-type BrandLoyalty = {
+interface BrandLoyalty {
   name: string;
   loyaltyScore: number;
-};
+}
 
-type Event = {
+interface Event {
   name: string;
   date: string | Date;
   details?: string;
-};
+}
 
-type TimelineActivity = {
+interface TimelineActivity {
   activity: string;
   duration: string;
   location?: string;
-};
+}
 
-type RegularStop = {
+interface RegularStop {
   location: string;
   purpose: string;
   frequency: string;
-};
+}
 
-type SpendingCategories = {
+interface SpendingCategories {
   [category: string]: {
     preference: number;
     frequency: number;
   };
-};
+}
 
-export type Persona = {
+export interface Persona {
   core: {
     age: number;
     name: string;
@@ -115,9 +115,4 @@ export type Persona = {
     upcoming_events: Event[];
     recent_changes: string[];
   };
-};
-
-export interface MBTIType {
-  type: string;
-  traits: string[];
 }

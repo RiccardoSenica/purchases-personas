@@ -1,9 +1,7 @@
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
-import { Persona } from './types';
-import { PersonaTool } from './personaSchema';
 
-export async function makeRequest(prompt: string) {
+export async function makeRequest(prompt: string, tool: any) {
   if (!process.env.ANTHROPIC_API_KEY) {
     throw Error('Anthropic API key missing.');
   }
@@ -16,7 +14,7 @@ export async function makeRequest(prompt: string) {
     model: 'claude-3-5-sonnet-20241022',
     max_tokens: 2000,
     temperature: 1,
-    tools: [PersonaTool],
+    tools: [tool],
     messages: [{ role: 'user', content: prompt }]
   });
 
@@ -33,5 +31,5 @@ export async function makeRequest(prompt: string) {
     { type: string; input: object }
   ];
 
-  return content[1].input as Persona;
+  return content[1].input;
 }

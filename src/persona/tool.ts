@@ -1,4 +1,4 @@
-export const PersonaTool = {
+export const Tool = {
   name: 'PersonaSchema' as const,
   input_schema: {
     type: 'object' as const,
