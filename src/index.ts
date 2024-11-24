@@ -4,12 +4,14 @@ import { generate as generatePurchases } from './purchase/store';
 
 const personaPromise = generatePersona();
 
+console.log(`Generating persona...`);
+
 personaPromise.then(id => {
-  console.log(`Persona generated! Now generating purchases for id ${id}`);
+  console.log(`Generating purchases for id ${id}...`);
 
   const purchasesPromise = generatePurchases(id);
 
   purchasesPromise.then(() => {
-    console.log('Purchases generated!');
+    console.log('Complete');
   });
 });

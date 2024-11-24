@@ -40,7 +40,10 @@ function formatList(items?: string[]): string {
   return items.join(', ');
 }
 
-async function generatePurchasePrompt(persona: Persona): Promise<string> {
+export async function generatePurchasePrompt(
+  persona: Persona,
+  reflectionThreshold: number
+): Promise<string> {
   try {
     const sections: string[] = [];
 
@@ -187,13 +190,49 @@ ${persona.context?.recent_changes?.length ? `- Recent lifestyle changes: ${forma
 Format each purchase as:
 [DATE] [TIME] | [STORE] | [ITEMS] | $[AMOUNT] | [CATEGORY] | [PLANNED/IMPULSE]
 
+
+For purchases over €${reflectionThreshold}, randomly include 0-5 reflections following these rules:
+
+1. Each reflection must occur AFTER the purchase date
+2. Reflections must be in chronological order
+3. First reflection should typically be within a week of purchase
+4. Space out subsequent reflections realistically (e.g., weeks or months apart)
+5. No reflection should be dated after ${new Date().toISOString()}
+
+Each reflection must include:
+1. A date when the reflection was made
+2. A personal comment that makes sense for that point in time
+3. A satisfaction score from 1-10 (10 being extremely satisfied, 1 being completely regretful)
+4. The persona's mood or context when making the reflection
+
+Consider how reflection timing affects content:
+- Immediate reflections (1-7 days): Initial impressions, emotional responses
+- Short-term reflections (1-4 weeks): Early usage experience, discovering features/issues
+- Medium-term reflections (1-3 months): More balanced assessment, practical value
+- Long-term reflections (3+ months): Durability, long-term value, retrospective thoughts
+
+Factor these into reflections:
+- How the persona's view typically evolves over time
+- Seasonal or contextual factors (e.g., using winter clothes in summer)
+- Financial impact becoming more/less significant over time
+- Product durability or performance changes
+- Changes in the persona's life circumstances
+- Whether the novelty wears off or appreciation grows
+
+Format each reflection as:
+[REFLECTION_DATE] | Mood: [MOOD] | [COMMENT] | Satisfaction: [SCORE]/10
+
+Example of a purchase with reflections:
+2024-01-15 12:30 | Nike Store | Running Shoes XC90 | $180 | Clothing | PLANNED
+Reflections:
+2024-01-16 | Mood: Excited | "First run with these was amazing - the cushioning is perfect for my style" | Satisfaction: 9/10
+2024-01-30 | Mood: Focused | "After two weeks of regular runs, they're holding up great and no knee pain" | Satisfaction: 8/10
+2024-03-10 | Mood: Practical | "Three months in, still performing well but showing some wear on the sides" | Satisfaction: 8/10
+
 Generate purchases that align with the persona's lifestyle, income level, and spending patterns.`);
 
     return sections.filter(section => section.trim().length > 0).join('\n\n');
   } catch (error) {
-    console.error('Error generating prompt:', error);
-    throw new Error('Failed to generate purchase prompt');
+    throw new Error(JSON.stringify(error));
   }
 }
-
-export default generatePurchasePrompt;

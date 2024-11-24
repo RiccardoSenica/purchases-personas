@@ -1,5 +1,7 @@
 {
   "name": "purchases-personas",
+  "version": "1.0.0",
+  "description": "Generate realistic fictional personas and their weekly purchase behaviors using AI",
   "scripts": {
     "start": "prisma generate && node dist/index.js",
     "dev": "nodemon src/index.ts",

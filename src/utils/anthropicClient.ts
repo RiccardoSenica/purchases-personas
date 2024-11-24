@@ -1,7 +1,17 @@
 import 'dotenv/config';
 import Anthropic from '@anthropic-ai/sdk';
 
-export async function makeRequest(prompt: string, tool: any) {
+export interface BaseTool {
+  readonly name: string;
+  readonly input_schema: {
+    readonly type: 'object';
+    readonly properties: Record<string, unknown>;
+    readonly required?: readonly string[];
+    readonly description?: string;
+  };
+}
+
+export async function makeRequest<T extends BaseTool>(prompt: string, tool: T) {
   if (!process.env.ANTHROPIC_API_KEY) {
     throw Error('Anthropic API key missing.');
   }
@@ -12,7 +22,7 @@ export async function makeRequest(prompt: string, tool: any) {
 
   const response = await anthropic.messages.create({
     model: 'claude-3-5-sonnet-20241022',
-    max_tokens: 2000,
+    max_tokens: 8192,
     temperature: 1,
     tools: [tool],
     messages: [{ role: 'user', content: prompt }]

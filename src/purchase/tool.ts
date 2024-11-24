@@ -14,7 +14,7 @@ export const Tool = {
             },
             amount: {
               type: 'number' as const,
-              description: 'Purchase amount in USD'
+              description: 'Purchase amount in EUR'
             },
             datetime: {
               type: 'string' as const,
@@ -28,6 +28,36 @@ export const Tool = {
             notes: {
               type: 'string' as const,
               description: 'Additional purchase details (optional)'
+            },
+            reflections: {
+              type: 'array' as const,
+              description:
+                'Array of reflections on purchases over threshold amount',
+              items: {
+                type: 'object' as const,
+                properties: {
+                  comment: {
+                    type: 'string' as const,
+                    description: 'Reflective comment about the purchase'
+                  },
+                  satisfactionScore: {
+                    type: 'number' as const,
+                    description: 'Purchase satisfaction score (1-10)',
+                    minimum: 1,
+                    maximum: 10
+                  },
+                  date: {
+                    type: 'string' as const,
+                    description: 'Date of the reflection in ISO 8601 format',
+                    format: 'date-time'
+                  },
+                  mood: {
+                    type: 'string' as const,
+                    description: 'Optional context about mood during reflection'
+                  }
+                },
+                required: ['comment', 'satisfactionScore', 'date'] as const
+              }
             }
           },
           required: ['name', 'amount', 'datetime', 'location'] as const
