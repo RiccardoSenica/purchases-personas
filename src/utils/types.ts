@@ -116,3 +116,8 @@ export type Persona = {
     recent_changes: string[];
   };
 };
+
+export interface MBTIType {
+  type: string;
+  traits: string[];
+}

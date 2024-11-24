@@ -1,12 +1,11 @@
 import { prisma } from './prismaClient';
+import { Persona } from './types';
 
-export async function savePersonaDb(persona: string) {
-  const personaObject = JSON.parse(persona);
-
+export async function savePersonaDb(persona: Persona) {
   const result = await prisma.user.create({
     data: {
-      name: personaObject['core']['name'],
-      age: personaObject['core']['age'],
+      name: persona.core.name,
+      age: persona.core.age,
       persona: JSON.stringify(persona)
     }
   });

@@ -132,3 +132,5 @@ dist
 .editorconfig
 
 personas/
+
+.DS_Store
