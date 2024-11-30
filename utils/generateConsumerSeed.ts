@@ -94,7 +94,7 @@ function generateBirthYear(): string {
   return Math.floor(Math.random() * (maxYear - minYear) + minYear).toString();
 }
 
-function formatPersonaSeed(
+function formatConsumerSeed(
   letters: string,
   year: string,
   postalCode: string
@@ -102,10 +102,10 @@ function formatPersonaSeed(
   return `${letters}:${year}:${postalCode}`;
 }
 
-export function generatePersonaSeed(): string {
+export function generateConsumerSeed(): string {
   const letters = generateLetters();
   const birthYear = generateBirthYear();
   const postalCode = generateRandomCAP();
 
-  return formatPersonaSeed(letters, birthYear, postalCode);
+  return formatConsumerSeed(letters, birthYear, postalCode);
 }

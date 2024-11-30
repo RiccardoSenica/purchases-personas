@@ -1,18 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "lib": ["es6"],
+    "target": "ES5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "outDir": "dist",
-    "rootDir": "src",
+    "skipLibCheck": true,
     "strict": true,
-    "noImplicitAny": true,
+    "noEmit": true,
     "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "types": ["node"],
-    "typeRoots": ["./node_modules/@types"]
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@app/*": ["./app/*"],
+      "@components/*": ["./components/*"],
+      "@utils/*": ["./utils/*"],
+      "@consumer/*": ["./utils/consumer/*"],
+      "@purchases/*": ["./utils/purchases/*"]
+    }
   },
-  "include": ["src/**/*", "utils/anthropicClient.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".yarn", ".next", ".vercel", ".vscode"]
 }

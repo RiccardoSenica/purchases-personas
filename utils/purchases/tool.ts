@@ -47,7 +47,7 @@ export const Tool = {
                   category: {
                     type: 'string' as const,
                     description:
-                      'Spending category (must match persona preferences)'
+                      'Spending category (must match consumer preferences)'
                   },
                   isPlanned: {
                     type: 'boolean' as const,

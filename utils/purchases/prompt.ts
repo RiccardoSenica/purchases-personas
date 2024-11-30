@@ -1,5 +1,5 @@
-import { ExerciseActivity, Persona, SocialActivity } from '../persona/types';
-import { getWeekRanges, isDateInRange } from '../utils/dateFunctions';
+import { ExerciseActivity, consumer, SocialActivity } from '../consumer/types';
+import { getWeekRanges, isDateInRange } from '../dateFunctions';
 
 function formatCategories(
   categories?: Record<
@@ -96,7 +96,7 @@ function formatContext(context: {
   return sections.join('\n\n');
 }
 
-function formatPersonaCore(core: Persona['core']): string {
+function formatConsumerCore(core: consumer['core']): string {
   const sections = [
     `${core.name} is a ${core.age}-year-old ${core.occupation.title} at ${core.occupation.location}`,
     `Living: ${core.household.status}, ${core.home.ownership} ${core.home.type} in ${core.home.location}`,
@@ -106,7 +106,7 @@ function formatPersonaCore(core: Persona['core']): string {
   return sections.filter(Boolean).join('\n');
 }
 
-function formatHousehold(household: Persona['core']['household']): string {
+function formatHousehold(household: consumer['core']['household']): string {
   const sections = [];
 
   if (household.members.length) {
@@ -140,7 +140,7 @@ function formatDailySchedule(
     .join('\n');
 }
 
-function formatCommute(commute: Persona['routines']['commute']): string {
+function formatCommute(commute: consumer['routines']['commute']): string {
   return `${commute.method} (${commute.route.join(' → ')})
 Regular stops: ${commute.regular_stops
     .map(stop => `${stop.frequency} ${stop.purpose} at ${stop.location}`)
@@ -156,7 +156,7 @@ function formatPurchasingStyle(impulsiveScore: number): string {
 }
 
 function formatSubscriptions(
-  subscriptions: Persona['finances']['subscriptions']
+  subscriptions: consumer['finances']['subscriptions']
 ): string {
   return subscriptions
     .map(
@@ -166,7 +166,7 @@ function formatSubscriptions(
     .join('\n');
 }
 
-function formatBrands(brands: Persona['preferences']['brands']): string {
+function formatBrands(brands: consumer['preferences']['brands']): string {
   return brands
     .map(brand => `${brand.name} (loyalty: ${brand.loyalty_score}/10)`)
     .join(', ');
@@ -175,18 +175,18 @@ function formatBrands(brands: Persona['preferences']['brands']): string {
 function formatWeekSection(
   range: { start: Date; end: Date },
   weekNum: number,
-  persona: Persona
+  consumer: consumer
 ): string {
   return `=== WEEK ${weekNum}: ${range.start.toISOString().split('T')[0]} to ${range.end.toISOString().split('T')[0]} ===
 
 Context:
-${formatWeekContext(range, persona)}
-${formatPurchaseOpportunities(persona)}`;
+${formatWeekContext(range, consumer)}
+${formatPurchaseOpportunities(consumer)}`;
 }
 
 function formatWeekContext(
   range: { start: Date; end: Date },
-  persona: Persona
+  consumer: consumer
 ): string {
   const contexts = [];
 
@@ -194,7 +194,7 @@ function formatWeekContext(
     contexts.push('Post-salary period');
   }
 
-  const events = persona.context.upcoming_events.filter(event =>
+  const events = consumer.context.upcoming_events.filter(event =>
     isDateInRange(new Date(event.date), range.start, range.end)
   );
 
@@ -205,28 +205,28 @@ function formatWeekContext(
   return contexts.map(c => `- ${c}`).join('\n');
 }
 
-function formatPurchaseOpportunities(persona: Persona): string {
+function formatPurchaseOpportunities(consumer: consumer): string {
   const opportunities = [];
 
-  if (persona.routines.commute.regular_stops.length) {
+  if (consumer.routines.commute.regular_stops.length) {
     opportunities.push('Regular purchase points:');
-    persona.routines.commute.regular_stops.forEach(stop => {
+    consumer.routines.commute.regular_stops.forEach(stop => {
       opportunities.push(
         `- ${stop.frequency} ${stop.purpose} at ${stop.location}`
       );
     });
   }
 
-  if (persona.habits.exercise.length) {
+  if (consumer.habits.exercise.length) {
     opportunities.push('Activity-related purchases:');
-    persona.habits.exercise.forEach(ex => {
+    consumer.habits.exercise.forEach(ex => {
       opportunities.push(`- ${ex.frequency} ${ex.activity} sessions`);
     });
   }
 
-  if (persona.habits.social.length) {
+  if (consumer.habits.social.length) {
     opportunities.push('Social spending occasions:');
-    persona.habits.social.forEach(soc => {
+    consumer.habits.social.forEach(soc => {
       opportunities.push(`- ${soc.frequency} ${soc.activity}`);
     });
   }
@@ -235,51 +235,51 @@ function formatPurchaseOpportunities(persona: Persona): string {
 }
 
 export async function generatePrompt(
-  persona: Persona,
+  consumer: consumer,
   reflectionThreshold: number,
   targetDate: Date,
   numWeeks: number
 ): Promise<string> {
   const weekRanges = getWeekRanges(targetDate, numWeeks);
 
-  return `PERSONA PROFILE:
-${formatPersonaCore(persona.core)}
+  return `consumer PROFILE:
+${formatConsumerCore(consumer.core)}
 
 Daily Schedule:
-${formatDailySchedule(persona.routines.weekday)}
-Commute: ${formatCommute(persona.routines.commute)}
+${formatDailySchedule(consumer.routines.weekday)}
+Commute: ${formatCommute(consumer.routines.commute)}
 
 Weekend Activities:
-${persona.routines.weekend.map(activity => `- ${activity}`).join('\n')}
+${consumer.routines.weekend.map(activity => `- ${activity}`).join('\n')}
 
-${formatHabits(persona.habits)}
+${formatHabits(consumer.habits)}
 
 Financial Profile:
-- Income: €${persona.core.occupation.income.toLocaleString()}/year
-- Payment Methods: ${persona.preferences.payment_methods.join(', ')}
-- Price Sensitivity: ${persona.preferences.price_sensitivity}/10
-- Purchasing Style: ${formatPurchasingStyle(persona.finances.spending_patterns.impulsive_score)}
+- Income: €${consumer.core.occupation.income.toLocaleString()}/year
+- Payment Methods: ${consumer.preferences.payment_methods.join(', ')}
+- Price Sensitivity: ${consumer.preferences.price_sensitivity}/10
+- Purchasing Style: ${formatPurchasingStyle(consumer.finances.spending_patterns.impulsive_score)}
 
 Monthly Fixed Expenses:
-${formatSubscriptions(persona.finances.subscriptions)}
+${formatSubscriptions(consumer.finances.subscriptions)}
 
 Spending Categories:
-${formatCategories(persona.finances.spending_patterns.categories)}
+${formatCategories(consumer.finances.spending_patterns.categories)}
 
 Brand Preferences:
-${formatBrands(persona.preferences.brands)}
+${formatBrands(consumer.preferences.brands)}
 
 Dietary Preferences:
-${persona.preferences.diet.join(', ')}
+${consumer.preferences.diet.join(', ')}
 
-${formatContext(persona.context)}
+${formatContext(consumer.context)}
 
 PURCHASE GENERATION GUIDELINES:
 
-Generate ${numWeeks} weeks of purchases for ${persona.core.name}:
+Generate ${numWeeks} weeks of purchases for ${consumer.core.name}:
 
 ${weekRanges
-  .map((range, i) => formatWeekSection(range, i + 1, persona))
+  .map((range, i) => formatWeekSection(range, i + 1, consumer))
   .join('\n\n')}
 
 Purchase Format:

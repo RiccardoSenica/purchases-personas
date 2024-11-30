@@ -131,7 +131,4 @@ dist
 
 .editorconfig
 
-personas/
-purchases/
-
 .DS_Store

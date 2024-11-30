@@ -126,7 +126,7 @@ const contextSchema = z.object({
   upcoming_events: z.array(upcomingEventSchema)
 });
 
-export const personaSchema = z.object({
+export const consumerSchema = z.object({
   core: coreSchema,
   routines: routinesSchema,
   preferences: preferencesSchema,
@@ -135,4 +135,10 @@ export const personaSchema = z.object({
   context: contextSchema
 });
 
-export type Persona = z.infer<typeof personaSchema>;
+export type consumer = z.infer<typeof consumerSchema>;
+
+export const consumerRequestSchema = z.object({
+  apiKey: z.string().min(1, 'API key is required')
+});
+
+export type GenerateRequest = z.infer<typeof consumerRequestSchema>;

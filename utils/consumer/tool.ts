@@ -1,8 +1,8 @@
 export const Tool = {
-  name: 'PersonaSchema' as const,
+  name: 'ConsumerSchema' as const,
   input_schema: {
     type: 'object' as const,
-    description: 'User persona',
+    description: 'User consumer',
     properties: {
       core: {
         type: 'object' as const,

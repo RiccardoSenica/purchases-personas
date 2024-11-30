@@ -11,17 +11,15 @@ export interface BaseTool {
   };
 }
 
-export async function makeRequest<T extends BaseTool>(prompt: string, tool: T) {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    throw Error('Anthropic API key missing.');
-  }
-
-  const anthropic = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY
-  });
+export async function makeRequest<T extends BaseTool>(
+  apiKey: string,
+  prompt: string,
+  tool: T
+) {
+  const client = new Anthropic({ apiKey });
 
   try {
-    const response = await anthropic.messages.create({
+    const response = await client.messages.create({
       model: 'claude-3-5-sonnet-20241022',
       max_tokens: 8192,
       temperature: 1,

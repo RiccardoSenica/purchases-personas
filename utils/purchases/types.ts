@@ -1,3 +1,4 @@
+import { consumerSchema } from '@utils/consumer/types';
 import { z } from 'zod';
 
 const isoDateTimeString = z.string().refine(
@@ -78,3 +79,10 @@ export const purchaseListSchema = z
   );
 
 export type PurchaseList = z.infer<typeof purchaseListSchema>;
+
+export const purchasesRequestSchema = z.object({
+  apiKey: z.string().min(1, 'API key is required'),
+  consumer: consumerSchema
+});
+
+export type PurchasesRequest = z.infer<typeof purchasesRequestSchema>;
