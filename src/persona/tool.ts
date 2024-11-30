@@ -226,13 +226,13 @@ export const Tool = {
         properties: {
           subscriptions: {
             type: 'array' as const,
-            description: 'Regular subscriptions',
+            description: 'Regular subscriptions and fixed expenses',
             items: {
               type: 'object' as const,
               properties: {
                 name: {
                   type: 'string' as const,
-                  description: 'Subscription name'
+                  description: 'Subscription or expense name'
                 },
                 amount: {
                   type: 'number' as const,
@@ -246,8 +246,40 @@ export const Tool = {
                   type: 'string' as const,
                   description: 'Next payment date',
                   format: 'date'
+                },
+                category: {
+                  type: 'string' as const,
+                  description: 'Expense category',
+                  enum: [
+                    'housing',
+                    'utilities',
+                    'insurance',
+                    'services',
+                    'memberships',
+                    'digital',
+                    'taxes',
+                    'other'
+                  ]
+                },
+                is_fixed_expense: {
+                  type: 'boolean' as const,
+                  description:
+                    'Whether this is a fixed expense (utilities, rent) or optional subscription'
+                },
+                auto_payment: {
+                  type: 'boolean' as const,
+                  description: 'Whether payment is automated'
                 }
-              }
+              },
+              required: [
+                'name',
+                'amount',
+                'frequency',
+                'next_due_date',
+                'category',
+                'is_fixed_expense',
+                'auto_payment'
+              ]
             }
           },
           spending_patterns: {

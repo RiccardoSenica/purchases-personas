@@ -102,20 +102,10 @@ function formatPersonaSeed(
   return `${letters}:${year}:${postalCode}`;
 }
 
-function generatePersonaSeed(): string {
+export function generatePersonaSeed(): string {
   const letters = generateLetters();
   const birthYear = generateBirthYear();
   const postalCode = generateRandomCAP();
 
   return formatPersonaSeed(letters, birthYear, postalCode);
-}
-
-export function generatePrompt(): string {
-  const seed = generatePersonaSeed();
-  const [letters, year, postalCode] = seed.split(':');
-
-  return `Using the Italian persona seed ${seed}, create a detailed persona of an Italian individual where:
-- The letters "${letters}" MUST ALL be included in the person's full name (first name + last name), though the name can contain additional letters
-- The person was born in ${year}
-- They live in an area with postal code (CAP) ${postalCode}.`;
 }

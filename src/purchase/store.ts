@@ -1,74 +1,82 @@
-import { prisma } from '../utils/prismaClient';
 import fs, { readFileSync } from 'fs';
-import { PurchaseList, Reflection } from './types';
+import { PurchaseList, purchaseListSchema } from './types';
 import { Tool } from './tool';
 import { BaseTool, makeRequest } from '../utils/anthropicClient';
 import { createFolderIfNotExists } from '../utils/createFolder';
-import { generatePurchasePrompt } from './promptGenerator';
+import { generatePrompt } from './prompt';
 import { Persona } from '../persona/types';
-import { Prisma } from '@prisma/client';
 
-export async function generate(personaId: number) {
-  const jsonFile = readFileSync(
-    `personas/${personaId}/${personaId}-persona.json`,
-    'utf-8'
-  );
+export async function generate(
+  personaId: string,
+  date: Date,
+  numWeeks: number
+) {
+  try {
+    const jsonFile = readFileSync(
+      `personas/${personaId}/${personaId}-persona.json`,
+      'utf-8'
+    );
+    const persona: Persona = JSON.parse(jsonFile);
 
-  const persona: Persona = JSON.parse(jsonFile);
+    const personaPrompt = await generatePrompt(
+      persona,
+      parseInt(process.env.PURCHASE_REFLECTION_THRESHOLD ?? '50'),
+      date,
+      numWeeks
+    );
 
-  const personaPrompt = await generatePurchasePrompt(
-    persona,
-    parseInt(process.env.PURCHASE_REFLECTION_THRESHOLD ?? '50')
-  );
+    const result = (await makeRequest(
+      personaPrompt,
+      Tool as BaseTool
+    )) as PurchaseList;
 
-  const result = (await makeRequest(
-    personaPrompt,
-    Tool as BaseTool
-  )) as PurchaseList;
+    const validPurchases = purchaseListSchema.safeParse(result);
 
-  await saveToDb(personaId, result);
+    if (validPurchases.error) {
+      throw Error(`Invalid purchases: ${validPurchases.error.message}`);
+    }
 
-  await saveToJson(result, personaId);
+    await saveToJson(validPurchases.data, personaId);
 
-  console.log(`Generated ${result.items.length} purchases`);
+    const totalPurchases = validPurchases.data.weeks.reduce(
+      (acc, week) => acc + week.purchases.length,
+      0
+    );
+    console.log(
+      `Generated ${totalPurchases} purchases for ${persona.core.name}`
+    );
+
+    return validPurchases.data;
+  } catch (error) {
+    console.error('Error generating purchases:', error);
+    throw error;
+  }
 }
 
-function reflectionToJson(reflection: Reflection): Prisma.JsonObject {
-  return {
-    comment: reflection.comment,
-    satisfactionScore: reflection.satisfactionScore,
-    date: reflection.date,
-    mood: reflection.mood || null
-  };
-}
-
-export async function saveToDb(personaId: number, purchases: PurchaseList) {
-  const result = await prisma.item.createMany({
-    data: purchases.items.map(
-      purchase =>
-        ({
-          userId: personaId,
-          name: purchase.name,
-          amount: purchase.amount,
-          datetime: purchase.datetime,
-          location: purchase.location,
-          notes: purchase.notes,
-          reflections: purchase.reflections
-            ? purchase.reflections.map(reflectionToJson)
-            : Prisma.JsonNull
-        }) satisfies Prisma.ItemCreateManyInput
-    )
-  });
-
-  console.log(`Inserted ${result.count} purchases for persona ${personaId}`);
-}
-
-export async function saveToJson(purchaseList: PurchaseList, id: number) {
+export async function saveToJson(purchaseList: PurchaseList, id: string) {
   await createFolderIfNotExists(`personas/${id}/`);
-
   const jsonName = `personas/${id}/${id}-purchases.json`;
 
-  await fs.promises.writeFile(jsonName, JSON.stringify(purchaseList), 'utf8');
+  await fs.promises.writeFile(
+    jsonName,
+    JSON.stringify(purchaseList, null, 2),
+    'utf8'
+  );
 
-  console.log(`Saved ${purchaseList.items.length} purchases as ${jsonName}`);
+  const purchaseStats = purchaseList.weeks.reduce(
+    (stats, week) => {
+      return {
+        total: stats.total + week.purchases.length,
+        planned: stats.planned + week.purchases.filter(p => p.isPlanned).length,
+        withReflections:
+          stats.withReflections +
+          week.purchases.filter(p => p.reflections?.length).length
+      };
+    },
+    { total: 0, planned: 0, withReflections: 0 }
+  );
+
+  console.log(
+    `Saved ${purchaseStats.total} purchases (${purchaseStats.planned} planned, ${purchaseStats.withReflections} with reflections) as ${jsonName}`
+  );
 }

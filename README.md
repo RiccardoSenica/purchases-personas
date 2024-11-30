@@ -11,9 +11,7 @@ A TypeScript application that leverages the Anthropic Claude API to generate rea
   - Financial patterns and spending habits
   - Contextual behaviors and upcoming events
 - Create realistic weekly purchase histories that match persona profiles
-- Store generated data in:
-  - PostgreSQL database for structured querying
-  - JSON files for easy data portability
+- Store generated data in JSON files for easy data portability
 
 ## 🚀 Getting Started
 
@@ -29,13 +27,7 @@ yarn install
 cp .env.example .env
 ```
 
-3. Initialize the database:
-
-```bash
-yarn migrate
-```
-
-4. Build and start the application:
+3. Build and start the application:
 
 ```bash
 yarn build
@@ -56,8 +48,6 @@ yarn dev
 - `yarn lint` - Run ESLint with automatic fixes
 - `yarn format` - Format code using Prettier
 - `yarn typecheck` - Check TypeScript types
-- `yarn generate` - Generate Prisma client
-- `yarn migrate` - Run database migrations
 
 ## ⚠️ Disclaimer
 
