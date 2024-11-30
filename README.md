@@ -1,6 +1,6 @@
 # Purchases Consumers Generator
 
-A TypeScript application that leverages the Anthropic Claude API to generate realistic fictional consumers and their weekly purchase behaviors. For creating synthetic datasets for retail/e-commerce applications with believable user behaviors and spending patterns.
+A NextJS application that leverages the Anthropic Claude API to generate synthetic consumers and their weekly purchase history. For creating synthetic datasets for retail/e-commerce applications with believable user behaviors and spending patterns.
 
 ## 🌟 Features
 
@@ -11,7 +11,6 @@ A TypeScript application that leverages the Anthropic Claude API to generate rea
   - Financial patterns and spending habits
   - Contextual behaviors and upcoming events
 - Create realistic weekly purchase histories that match consumer profiles
-- Store generated data in JSON files for easy data portability
 
 ## 🚀 Getting Started
 
