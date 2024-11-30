@@ -45,8 +45,8 @@ const weekSchema = z
     endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
     purchases: z
       .array(purchaseSchema)
-      .min(12, 'Minimum 12 purchases required per week')
-      .max(20, 'Maximum 20 purchases allowed per week'),
+      .min(7, 'Minimum 7 purchases required per week')
+      .max(21, 'Maximum 21 purchases allowed per week'),
     weekContext: weekContextSchema.optional()
   })
   .refine(

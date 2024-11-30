@@ -11,8 +11,7 @@ export const Header = () => {
               Synthetic Consumer Generator
             </h1>
             <p className='mt-2 text-blue-100'>
-              Generate synthetic customer and purchasing history
-              data
+              Generate synthetic customer and purchasing history data
             </p>
           </div>
         </div>
