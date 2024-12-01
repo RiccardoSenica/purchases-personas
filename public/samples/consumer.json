@@ -1,0 +1,209 @@
+{
+  "core": {
+    "age": 45,
+    "name": "Beatrice Ce",
+    "occupation": {
+      "title": "Operations Manager",
+      "level": "senior",
+      "income": 65000,
+      "location": "Brescia Industrial District",
+      "schedule": ["Monday-Friday, 8:30-17:30"]
+    },
+    "home": {
+      "type": "apartment",
+      "ownership": "owned",
+      "location": "Brescia Residential Area",
+      "commute_distance_km": 8.5
+    },
+    "household": {
+      "status": "married",
+      "members": ["husband", "daughter (14 years)"],
+      "pets": [
+        {
+          "type": "cat",
+          "name": "Luna"
+        }
+      ]
+    }
+  },
+  "routines": {
+    "weekday": {
+      "1800": {
+        "activity": "gym or family time",
+        "location": "varied",
+        "duration_minutes": 90
+      },
+      "0600": {
+        "activity": "wake up and prepare",
+        "location": "home",
+        "duration_minutes": 60
+      },
+      "0730": {
+        "activity": "school drop-off",
+        "location": "daughter's school",
+        "duration_minutes": 20
+      },
+      "0830": {
+        "activity": "work",
+        "location": "office",
+        "duration_minutes": 540
+      }
+    },
+    "weekend": [
+      "morning market visits",
+      "family activities",
+      "home organization",
+      "social gatherings",
+      "occasional day trips to Lake Garda"
+    ],
+    "commute": {
+      "method": "car",
+      "route": ["home", "daughter's school", "industrial district"],
+      "regular_stops": [
+        {
+          "location": "daughter's school",
+          "purpose": "school drop-off",
+          "frequency": "weekday mornings"
+        },
+        {
+          "location": "local café",
+          "purpose": "morning coffee",
+          "frequency": "2-3 times per week"
+        }
+      ]
+    }
+  },
+  "preferences": {
+    "diet": ["Mediterranean", "preference for local products"],
+    "brands": [
+      {
+        "name": "Benetton",
+        "loyalty_score": 8
+      },
+      {
+        "name": "Lavazza",
+        "loyalty_score": 7
+      },
+      {
+        "name": "Esselunga",
+        "loyalty_score": 9
+      }
+    ],
+    "price_sensitivity": 6,
+    "payment_methods": ["credit card", "contactless", "mobile payments"]
+  },
+  "finances": {
+    "subscriptions": [
+      {
+        "name": "Mortgage",
+        "amount": 1200,
+        "frequency": "monthly",
+        "next_due_date": "2023-12-01",
+        "category": "housing",
+        "is_fixed_expense": true,
+        "auto_payment": true
+      },
+      {
+        "name": "Utilities Bundle",
+        "amount": 180,
+        "frequency": "monthly",
+        "next_due_date": "2023-12-05",
+        "category": "utilities",
+        "is_fixed_expense": true,
+        "auto_payment": true
+      },
+      {
+        "name": "Home Insurance",
+        "amount": 45,
+        "frequency": "monthly",
+        "next_due_date": "2023-12-15",
+        "category": "insurance",
+        "is_fixed_expense": true,
+        "auto_payment": true
+      },
+      {
+        "name": "Netflix",
+        "amount": 18,
+        "frequency": "monthly",
+        "next_due_date": "2023-12-03",
+        "category": "digital",
+        "is_fixed_expense": false,
+        "auto_payment": true
+      },
+      {
+        "name": "Gym Membership",
+        "amount": 55,
+        "frequency": "monthly",
+        "next_due_date": "2023-12-01",
+        "category": "memberships",
+        "is_fixed_expense": false,
+        "auto_payment": true
+      }
+    ],
+    "spending_patterns": {
+      "impulsive_score": 4,
+      "categories": {
+        "groceries": {
+          "preference_score": 8,
+          "monthly_budget": 600
+        },
+        "dining": {
+          "preference_score": 7,
+          "monthly_budget": 300
+        },
+        "fashion": {
+          "preference_score": 6,
+          "monthly_budget": 200
+        }
+      }
+    }
+  },
+  "habits": {
+    "exercise": [
+      {
+        "activity": "gym workout",
+        "frequency": "3 times per week",
+        "duration_minutes": 60
+      },
+      {
+        "activity": "yoga",
+        "frequency": "once per week",
+        "duration_minutes": 45
+      }
+    ],
+    "social": [
+      {
+        "activity": "family dinner with parents",
+        "frequency": "bi-weekly"
+      },
+      {
+        "activity": "coffee with friends",
+        "frequency": "weekly"
+      }
+    ]
+  },
+  "context": {
+    "stress_triggers": [
+      "tight project deadlines",
+      "family-work balance",
+      "traffic during rush hour"
+    ],
+    "reward_behaviors": [
+      "weekend trips to Lake Garda",
+      "dining at favorite restaurants",
+      "shopping for home decor"
+    ],
+    "upcoming_events": [
+      {
+        "name": "Company's Annual Strategic Planning",
+        "date": "2024-01-15",
+        "importance": 8
+      },
+      {
+        "name": "Family Summer Vacation Planning",
+        "date": "2024-02-10",
+        "importance": 7
+      }
+    ]
+  }
+}

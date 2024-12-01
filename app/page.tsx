@@ -10,7 +10,7 @@ export default function Home() {
     <ToastProvider>
       <div className='min-h-screen flex flex-col'>
         <Header />
-        <main className='flex-1'>
+        <main className='flex-1 pt-[100px] pb-[88px]'>
           <Content />
         </main>
         <Footer />

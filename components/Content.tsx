@@ -4,7 +4,13 @@ import { PurchaseList, purchasesRequestSchema } from '@purchases/types';
 import { Button } from './Button';
 import { useToast } from '../context/toast/ToastContext';
 import { Toasts } from './Toast';
-import { LineChart, PersonStanding, KeyRound } from 'lucide-react';
+import {
+  LineChart,
+  PersonStanding,
+  KeyRound,
+  Download,
+  Sparkles
+} from 'lucide-react';
 
 export const Content = () => {
   const [apiKey, setApiKey] = useState('');
@@ -126,7 +132,7 @@ export const Content = () => {
       <div className='container mx-auto px-4 py-12'>
         <Toasts toasts={toasts} />
 
-        <div className='max-w-2xl mx-auto mb-12'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto mb-12'>
           <div className='bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-xl p-8'>
             <div className='flex items-center gap-4 mb-6'>
               <div className='p-3 bg-blue-100 rounded-xl'>
@@ -156,6 +162,66 @@ export const Content = () => {
                   disabled={loading || submitting}
                 />
               </div>
+              <div className='pt-3 space-y-2'>
+                <p className='text-sm text-slate-600 border-t border-slate-200 pt-3'>
+                  Need an API key? Visit{' '}
+                  <a
+                    href='https://console.anthropic.com/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='text-blue-600 hover:text-blue-700 font-medium'
+                  >
+                    Anthropic Console
+                  </a>{' '}
+                  to get one.
+                </p>
+                <p className='text-xs text-slate-500'>
+                  Your API key is only used to make requests and is never
+                  stored.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className='bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-xl p-8'>
+            <div className='flex items-center gap-4 mb-4'>
+              <div className='p-3 bg-indigo-100 rounded-xl'>
+                <Sparkles className='w-6 h-6 text-indigo-600' />
+              </div>
+              <div>
+                <h2 className='text-xl font-semibold text-slate-900'>
+                  Quick Start
+                </h2>
+                <p className='text-slate-600 mt-1'>
+                  Generate synthetic data in minutes
+                </p>
+              </div>
+            </div>
+            <ol className='list-decimal list-inside text-sm text-slate-600 mb-4 pl-1'>
+              <li className='mb-1'>Enter your API key</li>
+              <li className='mb-1'>Generate a consumer profile</li>
+              <li className='mb-1'>Review the generated data</li>
+              <li>Generate purchase history</li>
+            </ol>
+            <div className='flex gap-3'>
+              <a
+                href='/samples/consumer.json'
+                download
+                className='flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 
+                         text-slate-700 rounded-lg text-sm font-medium transition-colors'
+              >
+                <Download className='w-4 h-4' />
+                Sample Consumer
+              </a>
+              <a
+                href='/samples/purchases.json'
+                download
+                className='flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 
+                         text-slate-700 rounded-lg text-sm font-medium transition-colors'
+              >
+                <Download className='w-4 h-4' />
+                Sample Purchases
+              </a>
             </div>
           </div>
         </div>

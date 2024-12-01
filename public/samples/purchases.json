@@ -1,0 +1,480 @@
+{
+  "weeks": [
+    {
+      "weekNumber": 1,
+      "startDate": "2024-11-25",
+      "endDate": "2024-12-01",
+      "purchases": [
+        {
+          "name": "Lavazza Coffee",
+          "amount": 3.5,
+          "datetime": "2024-11-25T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Weekly Groceries",
+          "amount": 135,
+          "datetime": "2024-11-25T17:30:00Z",
+          "location": "Esselunga Supermarket",
+          "category": "groceries",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Weekly grocery shopping aligned with meal planning. Got good deals on fresh produce and stocked up on Luna's cat food.",
+              "satisfactionScore": 8,
+              "date": "2024-11-25T20:00:00Z",
+              "mood": "content"
+            }
+          ]
+        },
+        {
+          "name": "Morning Pastry",
+          "amount": 2.5,
+          "datetime": "2024-11-26T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": false
+        },
+        {
+          "name": "Lunch with Colleagues",
+          "amount": 18,
+          "datetime": "2024-11-27T12:30:00Z",
+          "location": "Office District Restaurant",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Lavazza Coffee",
+          "amount": 3.5,
+          "datetime": "2024-11-28T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Family Dinner",
+          "amount": 65,
+          "datetime": "2024-11-28T19:00:00Z",
+          "location": "Trattoria Bella Vista",
+          "category": "dining",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Wonderful evening with family. The restaurant choice was perfect for our bi-weekly gathering.",
+              "satisfactionScore": 9,
+              "date": "2024-11-28T22:00:00Z",
+              "mood": "happy"
+            }
+          ]
+        },
+        {
+          "name": "Yoga Class Drop-in",
+          "amount": 15,
+          "datetime": "2024-11-29T16:30:00Z",
+          "location": "Zen Studio",
+          "category": "health",
+          "isPlanned": true
+        },
+        {
+          "name": "Winter Sweater",
+          "amount": 75,
+          "datetime": "2024-11-30T10:00:00Z",
+          "location": "Benetton Store",
+          "category": "fashion",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Quality winter piece from preferred brand. Good investment for the season.",
+              "satisfactionScore": 8,
+              "date": "2024-11-30T18:00:00Z",
+              "mood": "satisfied"
+            }
+          ]
+        },
+        {
+          "name": "Coffee with Friends",
+          "amount": 12,
+          "datetime": "2024-11-30T11:30:00Z",
+          "location": "City Center Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Weekend Market Produce",
+          "amount": 32,
+          "datetime": "2024-12-01T09:30:00Z",
+          "location": "Local Farmers Market",
+          "category": "groceries",
+          "isPlanned": true
+        },
+        {
+          "name": "Cat Supplies",
+          "amount": 25,
+          "datetime": "2024-12-01T14:00:00Z",
+          "location": "Pet Shop",
+          "category": "household",
+          "isPlanned": true
+        }
+      ],
+      "weekContext": {
+        "events": ["Bi-weekly family dinner", "Weekly coffee with friends"],
+        "stressLevel": 6,
+        "notes": "Regular work week with standard routines"
+      }
+    },
+    {
+      "weekNumber": 2,
+      "startDate": "2024-12-02",
+      "endDate": "2024-12-08",
+      "purchases": [
+        {
+          "name": "Lavazza Coffee",
+          "amount": 3.5,
+          "datetime": "2024-12-02T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Weekly Groceries",
+          "amount": 142,
+          "datetime": "2024-12-02T17:30:00Z",
+          "location": "Esselunga Supermarket",
+          "category": "groceries",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Monthly stock-up after salary. Got some extra items for upcoming meals.",
+              "satisfactionScore": 8,
+              "date": "2024-12-02T20:00:00Z",
+              "mood": "satisfied"
+            }
+          ]
+        },
+        {
+          "name": "Office Lunch",
+          "amount": 15,
+          "datetime": "2024-12-03T13:00:00Z",
+          "location": "Office District Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Lavazza Coffee",
+          "amount": 3.5,
+          "datetime": "2024-12-04T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Yoga Class Drop-in",
+          "amount": 15,
+          "datetime": "2024-12-05T16:30:00Z",
+          "location": "Zen Studio",
+          "category": "health",
+          "isPlanned": true
+        },
+        {
+          "name": "Winter Boots",
+          "amount": 95,
+          "datetime": "2024-12-06T17:00:00Z",
+          "location": "City Shopping Center",
+          "category": "fashion",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Necessary purchase for winter. Good quality and practical for daily commute.",
+              "satisfactionScore": 9,
+              "date": "2024-12-06T20:00:00Z",
+              "mood": "pleased"
+            }
+          ]
+        },
+        {
+          "name": "Coffee with Friends",
+          "amount": 10.5,
+          "datetime": "2024-12-07T10:30:00Z",
+          "location": "City Center Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Home Decor Items",
+          "amount": 55,
+          "datetime": "2024-12-07T12:00:00Z",
+          "location": "Home Goods Store",
+          "category": "household",
+          "isPlanned": false,
+          "reflections": [
+            {
+              "comment": "Impulse purchase but items will add warmth to living room for winter.",
+              "satisfactionScore": 7,
+              "date": "2024-12-07T18:00:00Z",
+              "mood": "content"
+            }
+          ]
+        },
+        {
+          "name": "Weekend Market Produce",
+          "amount": 28,
+          "datetime": "2024-12-08T09:30:00Z",
+          "location": "Local Farmers Market",
+          "category": "groceries",
+          "isPlanned": true
+        },
+        {
+          "name": "Daughter's School Supplies",
+          "amount": 22,
+          "datetime": "2024-12-08T14:00:00Z",
+          "location": "Stationery Store",
+          "category": "household",
+          "isPlanned": true
+        }
+      ],
+      "weekContext": {
+        "events": ["Weekly coffee with friends"],
+        "stressLevel": 5,
+        "notes": "Post-salary week with regular activities"
+      }
+    },
+    {
+      "weekNumber": 3,
+      "startDate": "2024-12-09",
+      "endDate": "2024-12-15",
+      "purchases": [
+        {
+          "name": "Lavazza Coffee",
+          "amount": 3.5,
+          "datetime": "2024-12-09T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Weekly Groceries",
+          "amount": 138,
+          "datetime": "2024-12-09T17:30:00Z",
+          "location": "Esselunga Supermarket",
+          "category": "groceries",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Efficient shopping trip despite work stress. Stocked up on easy-to-prepare meals for busy week.",
+              "satisfactionScore": 7,
+              "date": "2024-12-09T20:00:00Z",
+              "mood": "tired"
+            }
+          ]
+        },
+        {
+          "name": "Lavazza Coffee",
+          "amount": 3.5,
+          "datetime": "2024-12-10T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Work Lunch",
+          "amount": 16,
+          "datetime": "2024-12-11T12:30:00Z",
+          "location": "Office District Restaurant",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Family Dinner",
+          "amount": 70,
+          "datetime": "2024-12-12T19:00:00Z",
+          "location": "Local Restaurant",
+          "category": "dining",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Nice break from work stress. Quality time with family worth the expense.",
+              "satisfactionScore": 9,
+              "date": "2024-12-12T22:00:00Z",
+              "mood": "relaxed"
+            }
+          ]
+        },
+        {
+          "name": "Yoga Class Drop-in",
+          "amount": 15,
+          "datetime": "2024-12-13T16:30:00Z",
+          "location": "Zen Studio",
+          "category": "health",
+          "isPlanned": true
+        },
+        {
+          "name": "Coffee with Friends",
+          "amount": 11,
+          "datetime": "2024-12-14T10:30:00Z",
+          "location": "City Center Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Casual Dress",
+          "amount": 65,
+          "datetime": "2024-12-14T11:30:00Z",
+          "location": "Benetton Store",
+          "category": "fashion",
+          "isPlanned": false,
+          "reflections": [
+            {
+              "comment": "Stress-induced purchase, though it's from preferred brand. Could have waited for sales.",
+              "satisfactionScore": 6,
+              "date": "2024-12-14T18:00:00Z",
+              "mood": "guilty"
+            }
+          ]
+        },
+        {
+          "name": "Weekend Market Produce",
+          "amount": 35,
+          "datetime": "2024-12-15T09:30:00Z",
+          "location": "Local Farmers Market",
+          "category": "groceries",
+          "isPlanned": true
+        },
+        {
+          "name": "Cat Treats and Toys",
+          "amount": 18,
+          "datetime": "2024-12-15T15:00:00Z",
+          "location": "Pet Shop",
+          "category": "household",
+          "isPlanned": false
+        }
+      ],
+      "weekContext": {
+        "events": [
+          "Bi-weekly family dinner",
+          "Weekly coffee with friends",
+          "Work project deadline"
+        ],
+        "stressLevel": 7,
+        "notes": "Busy week with work deadlines"
+      }
+    },
+    {
+      "weekNumber": 4,
+      "startDate": "2024-12-16",
+      "endDate": "2024-12-22",
+      "purchases": [
+        {
+          "name": "Lavazza Coffee",
+          "amount": 3.5,
+          "datetime": "2024-12-16T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Weekly Groceries",
+          "amount": 145,
+          "datetime": "2024-12-16T17:30:00Z",
+          "location": "Esselunga Supermarket",
+          "category": "groceries",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Stocked up on holiday baking supplies and regular groceries. Good planning for upcoming festivities.",
+              "satisfactionScore": 8,
+              "date": "2024-12-16T20:00:00Z",
+              "mood": "organized"
+            }
+          ]
+        },
+        {
+          "name": "Morning Pastry",
+          "amount": 2.5,
+          "datetime": "2024-12-17T08:15:00Z",
+          "location": "Local Café",
+          "category": "dining",
+          "isPlanned": false
+        },
+        {
+          "name": "Lunch with Colleagues",
+          "amount": 17,
+          "datetime": "2024-12-18T12:30:00Z",
+          "location": "Office District Restaurant",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Yoga Class Drop-in",
+          "amount": 15,
+          "datetime": "2024-12-19T16:30:00Z",
+          "location": "Zen Studio",
+          "category": "health",
+          "isPlanned": true
+        },
+        {
+          "name": "Holiday Gifts",
+          "amount": 120,
+          "datetime": "2024-12-20T17:00:00Z",
+          "location": "Shopping Center",
+          "category": "gifts",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Got most holiday shopping done within budget. Found thoughtful gifts for family.",
+              "satisfactionScore": 8,
+              "date": "2024-12-20T20:00:00Z",
+              "mood": "satisfied"
+            }
+          ]
+        },
+        {
+          "name": "Coffee with Friends",
+          "amount": 11.5,
+          "datetime": "2024-12-21T10:30:00Z",
+          "location": "City Center Café",
+          "category": "dining",
+          "isPlanned": true
+        },
+        {
+          "name": "Holiday Decorations",
+          "amount": 55,
+          "datetime": "2024-12-21T12:00:00Z",
+          "location": "Home Goods Store",
+          "category": "household",
+          "isPlanned": true,
+          "reflections": [
+            {
+              "comment": "Nice additions to holiday decor. Will enhance family celebration atmosphere.",
+              "satisfactionScore": 8,
+              "date": "2024-12-21T18:00:00Z",
+              "mood": "festive"
+            }
+          ]
+        },
+        {
+          "name": "Weekend Market Produce",
+          "amount": 38,
+          "datetime": "2024-12-22T09:30:00Z",
+          "location": "Local Farmers Market",
+          "category": "groceries",
+          "isPlanned": true
+        },
+        {
+          "name": "Books for Daughter",
+          "amount": 45,
+          "datetime": "2024-12-22T14:00:00Z",
+          "location": "Bookstore",
+          "category": "education",
+          "isPlanned": true
+        }
+      ],
+      "weekContext": {
+        "events": ["Weekly coffee with friends", "Holiday shopping starts"],
+        "stressLevel": 6,
+        "notes": "Pre-holiday preparations beginning"
+      }
+    }
+  ]
+}
