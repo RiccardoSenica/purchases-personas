@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { consumer, consumerSchema } from '@utils/consumer/types';
 import { PurchaseList, purchasesRequestSchema } from '@purchases/types';
-import { Purchases } from './Purchases';
 import { Button } from './Button';
 import { useToast } from '../context/toast/ToastContext';
 import { Toasts } from './Toast';
-import { PersonStanding } from 'lucide-react';
-import { CardTitle } from './CardTitle';
+import { LineChart, PersonStanding, KeyRound } from 'lucide-react';
 
 export const Content = () => {
   const [apiKey, setApiKey] = useState('');
@@ -108,81 +106,157 @@ export const Content = () => {
   };
 
   return (
-    <div className='container mx-auto flex flex-col lg:flex-row gap-6'>
-      <Toasts toasts={toasts} />
-      <div className='lg:w-1/2 w-full'>
-        <div className='bg-white rounded-lg border shadow-lg hover:shadow-xl transition-shadow'>
-          <CardTitle
-            title='Consumer'
-            icon={<PersonStanding className='w-5 h-5 text-blue-900' />}
-          />
-          <div className='p-6 space-y-6'>
-            <div className='space-y-2'>
-              <label
-                htmlFor='apiKey'
-                className='block text-sm font-medium text-gray-700'
-              >
-                Anthropic API Key
-              </label>
-              <input
-                id='apiKey'
-                type='password'
-                value={apiKey}
-                onChange={e => setApiKey(e.target.value)}
-                className='w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900'
-                placeholder='Enter your API key'
-                disabled={loading || submitting}
-              />
-            </div>
+    <div className='min-h-screen relative'>
+      <div
+        className='fixed inset-0 bg-white'
+        style={{
+          backgroundImage: `
+          linear-gradient(30deg, #e2e8f0 12%, transparent 12.5%, transparent 87.5%, #e2e8f0 87.5%, #e2e8f0),
+          linear-gradient(150deg, #e2e8f0 12%, transparent 12.5%, transparent 87.5%, #e2e8f0 87.5%, #e2e8f0),
+          linear-gradient(30deg, #e2e8f0 12%, transparent 12.5%, transparent 87.5%, #e2e8f0 87.5%, #e2e8f0),
+          linear-gradient(150deg, #e2e8f0 12%, transparent 12.5%, transparent 87.5%, #e2e8f0 87.5%, #e2e8f0),
+          linear-gradient(60deg, rgba(226,232,240,0.25) 25%, transparent 25.5%, transparent 75%, rgba(226,232,240,0.25) 75%, rgba(226,232,240,0.25)),
+          linear-gradient(60deg, rgba(226,232,240,0.25) 25%, transparent 25.5%, transparent 75%, rgba(226,232,240,0.25) 75%, rgba(226,232,240,0.25))
+        `,
+          backgroundSize: '80px 140px',
+          backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px',
+          opacity: 0.4
+        }}
+      />
+      <div className='container mx-auto px-4 py-12'>
+        <Toasts toasts={toasts} />
 
-            <Button
-              loading={loading}
-              disabled={loading || submitting}
-              labelLoading='Generating consumer... (it can take up to 30 seconds)'
-              labelReady='Generate consumer'
-              onClick={handleGenerateConsumer}
-            />
-
-            <div className='space-y-2'>
-              <div className='flex justify-between items-center'>
-                <label
-                  htmlFor='purchases'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Editable consumer
-                </label>
-                {purchasesError && (
-                  <span className='text-sm text-red-600'>{purchasesError}</span>
-                )}
+        <div className='max-w-2xl mx-auto mb-12'>
+          <div className='bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-xl p-8'>
+            <div className='flex items-center gap-4 mb-6'>
+              <div className='p-3 bg-blue-100 rounded-xl'>
+                <KeyRound className='w-6 h-6 text-blue-600' />
               </div>
-              <textarea
-                id='purchases'
-                value={editedConsumer}
-                onChange={e => handleJsonEdit(e.target.value)}
-                className='w-full h-96 p-4 font-mono text-sm bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none'
-                spellCheck='false'
-                disabled={submitting}
-                placeholder={
-                  consumer ? '' : 'Generated consumer will appear here'
-                }
-              />
+              <div>
+                <h2 className='text-xl font-semibold text-slate-900'>
+                  API Authentication
+                </h2>
+                <p className='text-slate-600 mt-1'>
+                  Enter your Anthropic API key to get started
+                </p>
+              </div>
             </div>
-
-            <Button
-              loading={submitting}
-              disabled={
-                !editedConsumer || Boolean(purchasesError) || submitting
-              }
-              labelLoading='Generating purchases... (it can take up to a minute)'
-              labelReady='Generate purchases'
-              onClick={handleGeneratePurchases}
-            />
+            <div className='space-y-4'>
+              <div className='relative'>
+                <input
+                  id='apiKey'
+                  type='password'
+                  value={apiKey}
+                  onChange={e => setApiKey(e.target.value)}
+                  className='w-full px-4 py-3 border border-slate-200 rounded-xl
+                           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                           text-slate-900 bg-white transition-all duration-200
+                           placeholder-slate-400'
+                  placeholder='Enter your API key'
+                  disabled={loading || submitting}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className='lg:w-1/2 w-full'>
-        <Purchases purchases={purchasesResult} />
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto'>
+          <div className='bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300'>
+            <div className='p-6 border-b border-slate-100 bg-gradient-to-r from-blue-50 to-indigo-50'>
+              <div className='flex items-center gap-4'>
+                <div className='p-2 bg-blue-100 rounded-lg'>
+                  <PersonStanding className='w-5 h-5 text-blue-600' />
+                </div>
+                <h2 className='text-xl font-semibold text-slate-900'>
+                  Consumer Data
+                </h2>
+              </div>
+            </div>
+            <div className='p-8 space-y-6'>
+              <Button
+                loading={loading}
+                disabled={loading || submitting}
+                labelLoading='Generating consumer... (it can take up to 30 seconds)'
+                labelReady='Generate Consumer Profile'
+                onClick={handleGenerateConsumer}
+              />
+
+              <div className='space-y-3'>
+                <div className='flex justify-between items-center'>
+                  <label className='text-sm font-medium text-slate-700'>
+                    Edit Consumer Data
+                  </label>
+                  {purchasesError && (
+                    <span className='text-sm text-red-600 bg-red-50 px-4 py-1 rounded-full'>
+                      {purchasesError}
+                    </span>
+                  )}
+                </div>
+                <div className='relative'>
+                  <textarea
+                    value={editedConsumer}
+                    onChange={e => handleJsonEdit(e.target.value)}
+                    className='w-full h-96 p-4 font-mono text-sm
+                             bg-slate-50 rounded-xl border border-slate-200 
+                             focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                             resize-none transition-all duration-200'
+                    spellCheck='false'
+                    disabled={submitting}
+                    placeholder={
+                      consumer
+                        ? ''
+                        : 'Generated consumer profile will appear here'
+                    }
+                  />
+                </div>
+              </div>
+
+              <Button
+                loading={submitting}
+                disabled={
+                  !editedConsumer || Boolean(purchasesError) || submitting
+                }
+                labelLoading='Generating purchases... (it can take up to a minute)'
+                labelReady='Generate Purchase History'
+                onClick={handleGeneratePurchases}
+              />
+            </div>
+          </div>
+
+          <div className='bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300'>
+            <div className='p-6 border-b border-slate-100 bg-gradient-to-r from-indigo-50 to-blue-50'>
+              <div className='flex items-center gap-4'>
+                <div className='p-2 bg-blue-100 rounded-lg'>
+                  <LineChart className='w-5 h-5 text-blue-600' />
+                </div>
+                <h2 className='text-xl font-semibold text-slate-900'>
+                  Purchase History
+                </h2>
+              </div>
+            </div>
+            <div className='p-8'>
+              <div className='h-[32rem] rounded-xl'>
+                {purchasesResult ? (
+                  <div className='h-full bg-slate-50 border border-slate-200 rounded-xl'>
+                    <pre className='text-sm text-slate-700 whitespace-pre-wrap p-6 h-full overflow-auto'>
+                      {JSON.stringify(purchasesResult, null, 2)}
+                    </pre>
+                  </div>
+                ) : (
+                  <div
+                    className='flex flex-col items-center justify-center h-full 
+                                bg-slate-50 border border-slate-200 rounded-xl gap-4'
+                  >
+                    <LineChart className='w-12 h-12 text-slate-300' />
+                    <p className='text-sm font-medium text-slate-500'>
+                      No purchase history generated yet
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
