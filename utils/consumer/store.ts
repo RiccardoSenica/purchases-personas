@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { consumer, consumerSchema } from './types';
+import { Consumer, consumerSchema } from './types';
 import { Tool } from './tool';
 import { BaseTool, makeRequest } from '../anthropicClient';
 import { generatePrompt } from './prompt';
@@ -11,7 +11,7 @@ export async function generate(apiKey: string) {
     apiKey,
     prompt,
     Tool as BaseTool
-  )) as consumer;
+  )) as Consumer;
 
   const validConsumer = consumerSchema.safeParse(result);
 

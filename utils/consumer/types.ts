@@ -135,7 +135,7 @@ export const consumerSchema = z.object({
   context: contextSchema
 });
 
-export type consumer = z.infer<typeof consumerSchema>;
+export type Consumer = z.infer<typeof consumerSchema>;
 
 export const consumerRequestSchema = z.object({
   apiKey: z.string().min(1, 'API key is required')

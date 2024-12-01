@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { consumer, consumerSchema } from '@utils/consumer/types';
+import { Consumer, consumerSchema } from '@utils/consumer/types';
 import { PurchaseList, purchasesRequestSchema } from '@purchases/types';
 import { Button } from './Button';
 import { useToast } from '../context/toast/ToastContext';
@@ -16,13 +16,45 @@ export const Content = () => {
   const [apiKey, setApiKey] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [consumer, setConsumer] = useState<consumer | null>(null);
+  const [consumer, setConsumer] = useState<Consumer | null>(null);
   const [purchasesError, setPurchasesError] = useState<string | null>(null);
   const [editedConsumer, setEditedConsumer] = useState('');
   const [purchasesResult, setPurchasesResult] = useState<PurchaseList | null>(
     null
   );
   const { showToast, toasts } = useToast();
+
+  const downloadJson = (data: Consumer | PurchaseList, filename: string) => {
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: 'application/json'
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadConsumer = () => {
+    if (!consumer) return;
+    try {
+      downloadJson(consumer, 'consumer.json');
+    } catch (err) {
+      showToast('Failed to download consumer data');
+    }
+  };
+
+  const handleDownloadPurchases = () => {
+    if (!purchasesResult) return;
+    try {
+      downloadJson(purchasesResult, 'purchases.json');
+    } catch (err) {
+      showToast('Failed to download purchase history');
+    }
+  };
 
   const handleGenerateConsumer = async () => {
     if (!apiKey.trim()) {
@@ -278,6 +310,13 @@ export const Content = () => {
               </div>
 
               <Button
+                labelReady='Download generated consumer data'
+                onClick={handleDownloadConsumer}
+                disabled={!consumer}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700 rounded-lg text-sm font-medium transition-colors"
+              />
+
+              <Button
                 loading={submitting}
                 disabled={
                   !editedConsumer || Boolean(purchasesError) || submitting
@@ -301,7 +340,7 @@ export const Content = () => {
               </div>
             </div>
             <div className='p-8'>
-              <div className='h-[32rem] rounded-xl'>
+              <div className='h-[34rem] rounded-xl'>
                 {purchasesResult ? (
                   <div className='h-full bg-slate-50 border border-slate-200 rounded-xl'>
                     <pre className='text-sm text-slate-700 whitespace-pre-wrap p-6 h-full overflow-auto'>
@@ -320,6 +359,14 @@ export const Content = () => {
                   </div>
                 )}
               </div>
+            </div>
+            <div className='px-8'>
+              <Button
+                labelReady='Download generated purchase history data'
+                onClick={handleDownloadPurchases}
+                disabled={!purchasesResult}
+                className='w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700 rounded-lg text-sm font-medium transition-colors'
+              />
             </div>
           </div>
         </div>

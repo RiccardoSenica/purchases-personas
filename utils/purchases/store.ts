@@ -2,11 +2,11 @@ import { PurchaseList, purchaseListSchema } from './types';
 import { Tool } from './tool';
 import { BaseTool, makeRequest } from '../anthropicClient';
 import { generatePrompt } from './prompt';
-import { consumer } from '../consumer/types';
+import { Consumer } from '../consumer/types';
 
 export async function generate(
   apiKey: string,
-  consumer: consumer,
+  consumer: Consumer,
   date: Date,
   numWeeks: number
 ) {

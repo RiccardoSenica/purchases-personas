@@ -1,4 +1,4 @@
-import { ExerciseActivity, consumer, SocialActivity } from '../consumer/types';
+import { ExerciseActivity, Consumer, SocialActivity } from '../consumer/types';
 import { getWeekRanges, isDateInRange } from '../dateFunctions';
 
 function formatCategories(
@@ -96,7 +96,7 @@ function formatContext(context: {
   return sections.join('\n\n');
 }
 
-function formatConsumerCore(core: consumer['core']): string {
+function formatConsumerCore(core: Consumer['core']): string {
   const sections = [
     `${core.name} is a ${core.age}-year-old ${core.occupation.title} at ${core.occupation.location}`,
     `Living: ${core.household.status}, ${core.home.ownership} ${core.home.type} in ${core.home.location}`,
@@ -106,7 +106,7 @@ function formatConsumerCore(core: consumer['core']): string {
   return sections.filter(Boolean).join('\n');
 }
 
-function formatHousehold(household: consumer['core']['household']): string {
+function formatHousehold(household: Consumer['core']['household']): string {
   const sections = [];
 
   if (household.members.length) {
@@ -140,7 +140,7 @@ function formatDailySchedule(
     .join('\n');
 }
 
-function formatCommute(commute: consumer['routines']['commute']): string {
+function formatCommute(commute: Consumer['routines']['commute']): string {
   return `${commute.method} (${commute.route.join(' → ')})
 Regular stops: ${commute.regular_stops
     .map(stop => `${stop.frequency} ${stop.purpose} at ${stop.location}`)
@@ -156,7 +156,7 @@ function formatPurchasingStyle(impulsiveScore: number): string {
 }
 
 function formatSubscriptions(
-  subscriptions: consumer['finances']['subscriptions']
+  subscriptions: Consumer['finances']['subscriptions']
 ): string {
   return subscriptions
     .map(
@@ -166,7 +166,7 @@ function formatSubscriptions(
     .join('\n');
 }
 
-function formatBrands(brands: consumer['preferences']['brands']): string {
+function formatBrands(brands: Consumer['preferences']['brands']): string {
   return brands
     .map(brand => `${brand.name} (loyalty: ${brand.loyalty_score}/10)`)
     .join(', ');
@@ -175,7 +175,7 @@ function formatBrands(brands: consumer['preferences']['brands']): string {
 function formatWeekSection(
   range: { start: Date; end: Date },
   weekNum: number,
-  consumer: consumer
+  consumer: Consumer
 ): string {
   return `=== WEEK ${weekNum}: ${range.start.toISOString().split('T')[0]} to ${range.end.toISOString().split('T')[0]} ===
 
@@ -186,7 +186,7 @@ ${formatPurchaseOpportunities(consumer)}`;
 
 function formatWeekContext(
   range: { start: Date; end: Date },
-  consumer: consumer
+  consumer: Consumer
 ): string {
   const contexts = [];
 
@@ -205,7 +205,7 @@ function formatWeekContext(
   return contexts.map(c => `- ${c}`).join('\n');
 }
 
-function formatPurchaseOpportunities(consumer: consumer): string {
+function formatPurchaseOpportunities(consumer: Consumer): string {
   const opportunities = [];
 
   if (consumer.routines.commute.regular_stops.length) {
@@ -235,7 +235,7 @@ function formatPurchaseOpportunities(consumer: consumer): string {
 }
 
 export async function generatePrompt(
-  consumer: consumer,
+  consumer: Consumer,
   reflectionThreshold: number,
   targetDate: Date,
   numWeeks: number
