@@ -1,4 +1,4 @@
-# Purchases Consumers Generator
+# Synthetic Consumers Data Generator
 
 A NextJS application that leverages the Anthropic Claude API to generate synthetic consumers and their weekly purchase history. For creating synthetic datasets for retail/e-commerce applications with believable user behaviors and spending patterns.
 
